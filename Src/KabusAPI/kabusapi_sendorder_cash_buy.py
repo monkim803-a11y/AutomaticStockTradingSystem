@@ -75,7 +75,7 @@ class BuyOrderRequest:
         }
 	# 注文送信
 	def SendOrder(self):
-		json_data = json.dumps(obj).encode('utf-8')
+		json_data = json.dumps(self.to_dict()).encode('utf-8')
 
 		url = 'http://localhost:18080/kabusapi/sendorder'
 		req = urllib.request.Request(url, json_data, method='POST')
