@@ -5,11 +5,11 @@ import pprint
 #指値注文情報
 class ReverseLimitOrder:
     def __init__(self,
-                 TriggerSec=3,
-                 TriggerPrice=1600,
-                 UnderOver=2,
-                 AfterHitOrderType=1,
-                 AfterHitPrice=0):
+                 TriggerSec,
+                 TriggerPrice,
+                 UnderOver,
+                 AfterHitOrderType,
+                 AfterHitPrice):
         self.TriggerSec = TriggerSec
         self.TriggerPrice = TriggerPrice
         self.UnderOver = UnderOver
