@@ -11,10 +11,10 @@ import json
 
 class Symbol:
     def __init__(self,
-                 code="5401",
-                 market=1,
-                 addinfo=False,
-                 api_key=""):
+                 code, #銘柄コード
+                 market, #市場コード
+                 addinfo=True, #追加情報有無
+                 api_key=""): #api_key
 
         self.code = code
         self.market = market
