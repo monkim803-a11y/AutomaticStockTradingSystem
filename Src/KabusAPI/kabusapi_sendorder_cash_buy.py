@@ -26,36 +26,36 @@ class ReverseLimitOrder:
             "AfterHitPrice": self.AfterHitPrice
         }
 
-#指値買い注文情報
+#買い注文情報
 class BuyOrderRequest:
     def __init__(self,
                  Symbol,
                  Exchange,
-                 SecurityType,
-                 Side,
-                 CashMargin,
-                 DelivType,
-                 FundType,
-                 AccountType,
+                 SecurityType = 1,
+                 Side = 2,
+                 CashMargin = 1,
+                 DelivType = 2,
+                 FundType = "AA",
+                 AccountType = 4,
                  Qty,
                  FrontOrderType,
                  Price,
                  ExpireDay,
                  ReverseLimitOrder):
 
-        self.Symbol = Symbol
-        self.Exchange = Exchange
-        self.SecurityType = SecurityType
-        self.Side = Side
-        self.CashMargin = CashMargin
-        self.DelivType = DelivType
-        self.FundType = FundType
-        self.AccountType = AccountType
-        self.Qty = Qty
-        self.FrontOrderType = FrontOrderType
-        self.Price = Price
-        self.ExpireDay = ExpireDay
-        self.ReverseLimitOrder = ReverseLimitOrder or ReverseLimitOrder()
+        self.Symbol = Symbol #銘柄コード
+        self.Exchange = Exchange #市場コード
+        self.SecurityType = SecurityType #市場タイプ（=1（株式））
+        self.Side = Side #売買区分（=2（買））
+        self.CashMargin = CashMargin #信用区分（=1（現物））
+        self.DelivType = DelivType #受渡区分
+        self.FundType = FundType #資産区分（預り区分）（="AA"（信用代用））
+        self.AccountType = AccountType #口座種別（=4（特定））
+        self.Qty = Qty #数量
+        self.FrontOrderType = FrontOrderType #執行条件
+        self.Price = Price #注文価格
+        self.ExpireDay = ExpireDay #注文有効期限
+        self.ReverseLimitOrder = ReverseLimitOrder or ReverseLimitOrder() #逆指値条件
 	# 注文文字列化
     def to_dict(self):
         return {
