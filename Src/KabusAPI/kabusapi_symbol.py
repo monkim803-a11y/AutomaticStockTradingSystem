@@ -2,23 +2,62 @@ import urllib.request
 import json
 import pprint
 
-url = 'http://localhost:18080/kabusapi/symbol/5401@1'
-params = { 'addinfo': 'false' } # true:追加情報を出力する、false:追加情報を出力しない　※追加情報は、「時価総額」、「発行済み株式数」、「決算期日」、「清算値」を意味します
-req = urllib.request.Request('{}?{}'.format(url, urllib.parse.urlencode(params)), method='GET')
-req.add_header('Content-Type', 'application/json')
-req.add_header('X-API-KEY', 'ed94b0d34f9441c3931621e55230e402')
+# symbol.py
 
-try:
-    with urllib.request.urlopen(req) as res:
-        print(res.status, res.reason)
-        for header in res.getheaders():
-            print(header)
-        print()
-        content = json.loads(res.read())
-        pprint.pprint(content)
-except urllib.error.HTTPError as e:
-    print(e)
-    content = json.loads(e.read())
-    pprint.pprint(content)
-except Exception as e:
-    print(e)
+import urllib.request
+import urllib.parse
+import json
+
+
+class Symbol:
+    def __init__(self,
+                 code="5401",
+                 market=1,
+                 addinfo=False,
+                 api_key=""):
+
+        self.code = code
+        self.market = market
+        self.addinfo = addinfo
+        self.api_key = api_key
+
+    # URL を自動生成
+    def build_url(self):
+        base = "http://localhost:18080/kabusapi/symbol/"
+        return f"{base}{self.code}@{self.market}"
+
+    # GET パラメータを dict → URL エンコード
+    def build_params(self):
+        return urllib.parse.urlencode({
+            "addinfo": str(self.addinfo).lower()
+        })
+
+    # API 呼び出し
+    def get(self):
+        url = f"{self.build_url()}?{self.build_params()}"
+
+        req = urllib.request.Request(url, method="GET")
+        req.add_header("Content-Type", "application/json")
+        req.add_header("X-API-KEY", self.api_key)
+
+        try:
+            with urllib.request.urlopen(req) as res:
+                content = json.loads(res.read())
+                return {
+                    "status": res.status,
+                    "response": content
+                }
+
+        except urllib.error.HTTPError as e:
+            content = json.loads(e.read())
+            return {
+                "status": e.code,
+                "response": content
+            }
+
+        except Exception as e:
+            return {
+                "status": "error",
+                "response": str(e)
+            }
+
