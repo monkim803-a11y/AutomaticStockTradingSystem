@@ -23,25 +23,22 @@ class ReverseLimitOrder:
             "AfterHitOrderType": self.AfterHitOrderType,
             "AfterHitPrice": self.AfterHitPrice
         }
-class SendOrderRequest:
+class SellOrderRequest:
     def __init__(self,
-                 Symbol="9433",
-                 Exchange=1,
-                 SecurityType=1,
-                 Side="1",
-                 CashMargin=1,
-                 DelivType=0,
-                 FundType="  ",
-                 AccountType=2,
-                 Qty=100,
-                 FrontOrderType=30,
-                 Price=2762.5,
-                 ExpireDay=0,
-                 TriggerSec=1,
-                 TriggerPrice=2600,
-                 UnderOver=1,
-                 AfterHitOrderType=1,
-                 AfterHitPrice=0):
+                 Symbol, #銘柄コード
+                 Exchange=1, #市場コード
+                 SecurityType=1, #商品種別（=1（株式））
+                 Side="1", #売買区分（=1（売））
+                 CashMargin=1, #信用区分（=1（現物））
+                 DelivType=0, #受渡区分（=0（指定なし））
+                 FundType="  ", #資産区分（="  "（現物売は固定））
+                 AccountType=4, #口座種別（=4（特定））
+                 Qty, #数量
+                 FrontOrderType, #執行条件
+                 Price, #注文価格
+                 ExpireDay=0, #注文有効期限
+                 ReverseLimitOrder #逆指値情報
+                ):
 
         # --- メイン注文パラメータ ---
         self.Symbol = Symbol
@@ -58,11 +55,7 @@ class SendOrderRequest:
         self.ExpireDay = ExpireDay
 
         # --- 逆指値 ---
-        self.TriggerSec = TriggerSec
-        self.TriggerPrice = TriggerPrice
-        self.UnderOver = UnderOver
-        self.AfterHitOrderType = AfterHitOrderType
-        self.AfterHitPrice = AfterHitPrice
+        self.ReverseLimitOrder = ReverseLimitOrder
 
     # JSON 変換
     def to_dict(self):
@@ -80,11 +73,11 @@ class SendOrderRequest:
             "Price": self.Price,
             "ExpireDay": self.ExpireDay,
             "ReverseLimitOrder": {
-                "TriggerSec": self.TriggerSec,
-                "TriggerPrice": self.TriggerPrice,
-                "UnderOver": self.UnderOver,
-                "AfterHitOrderType": self.AfterHitOrderType,
-                "AfterHitPrice": self.AfterHitPrice
+                "TriggerSec": self.ReverseLimitOrder.TriggerSec,
+                "TriggerPrice": self.ReverseLimitOrder.TriggerPrice,
+                "UnderOver": self.ReverseLimitOrder.UnderOver,
+                "AfterHitOrderType": self.ReverseLimitOrder.AfterHitOrderType,
+                "AfterHitPrice": self.ReverseLimitOrder.AfterHitPrice
             }
         }
 
