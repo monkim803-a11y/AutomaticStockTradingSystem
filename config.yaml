@@ -1,0 +1,27 @@
+# config.yaml
+
+# --- API 設定 ---
+api:
+  host: "http://localhost:18080"
+  api_key: "YOUR_API_KEY_HERE"
+
+# --- 戦略設定 ---
+strategy:
+  lookback_days: 20
+  volume_threshold: 2.0     # 出来高が前日比2倍以上
+  vwap_filter: true
+  min_price: 300
+  max_price: 5000
+
+# --- リスク管理 ---
+risk:
+  max_loss_rate: 0.01       # 1回の損失は全資産の1%
+
+# --- ログ設定 ---
+logging:
+  level: "INFO"
+  file: "logs/system.log"
+
+# --- 実行間隔 ---
+system:
+  interval_seconds: 30
