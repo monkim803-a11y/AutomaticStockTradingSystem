@@ -10,14 +10,11 @@ class Order:
                  quantity, #数量
                  stasus, #ステータス（未約定・約定完了）
                 ):
-          
-	
-	# 注文文字列化
-    def to_dict(self):
-        return {
-            "TriggerSec": self.TriggerSec,
-            "TriggerPrice": self.TriggerPrice,
-            "UnderOver": self.UnderOver,
-            "AfterHitOrderType": self.AfterHitOrderType,
-            "AfterHitPrice": self.AfterHitPrice
-        }
+			self.order_id = order_id
+			self.signal_id = signal_id
+			self.symbol_id = symbol_id
+			self.created_at = created_at
+			self.side = side
+			self.price = price
+			self.quantity = quantity
+			self.status = status
