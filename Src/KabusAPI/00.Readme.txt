@@ -1,119 +1,119 @@
-y‘O’ñz
-EPC‚Épython3‚ªƒCƒ“ƒXƒg[ƒ‹‚³‚ê‚Ä‚¢‚é‚±‚ÆB
-EPUSH”zM(websocket)‚ğ‚·‚é‚É‚ÍApython3‚ÌƒCƒ“ƒXƒg[ƒ‹Œã‚ÉƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚É‚ÄˆÈ‰º‚ÌƒRƒ}ƒ“ƒh‚ğÀs‚·‚éB
-ƒRƒ}ƒ“ƒhFpy -m pip install websocket-client
+ã€å‰æã€‘
+ãƒ»PCã«python3ãŒã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ã•ã‚Œã¦ã„ã‚‹ã“ã¨ã€‚
+ãƒ»PUSHé…ä¿¡(websocket)ã‚’ã™ã‚‹ã«ã¯ã€python3ã®ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«å¾Œã«ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã«ã¦ä»¥ä¸‹ã®ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã€‚
+ã‚³ãƒãƒ³ãƒ‰ï¼špy -m pip install websocket-client
 
-y’ˆÓz
-utoken.pyvƒtƒ@ƒCƒ‹–¼‚ÍApython‚Å—\–ñ‚Æ‚³‚ê‚Ä‚¢‚é‚½‚ßg—p‚Å‚«‚Ü‚¹‚ñB
+ã€æ³¨æ„ã€‘
+ã€Œtoken.pyã€ãƒ•ã‚¡ã‚¤ãƒ«åã¯ã€pythonã§äºˆç´„ã¨ã•ã‚Œã¦ã„ã‚‹ãŸã‚ä½¿ç”¨ã§ãã¾ã›ã‚“ã€‚
 
-ykabuƒXƒeAPIÀs•û–@z
-ƒRƒ}ƒ“ƒhƒvƒƒ“ƒvƒg‚©‚çAŠeƒRƒ}ƒ“ƒh‚ğÀs‚·‚éB
+ã€kabuã‚¹ãƒ†APIå®Ÿè¡Œæ–¹æ³•ã€‘
+ã‚³ãƒãƒ³ãƒ‰ãƒ—ãƒ­ãƒ³ãƒ—ãƒˆã‹ã‚‰ã€å„ã‚³ãƒãƒ³ãƒ‰ã‚’å®Ÿè¡Œã™ã‚‹ã€‚
 
-yƒtƒ@ƒCƒ‹ƒŠƒXƒgz
-‚PDƒg[ƒNƒ“”­s
-ƒRƒ}ƒ“ƒhFpython kabusapi_token.py
-¦‚P‚Å”­s‚µ‚½token‚ğ‚QˆÈ~‚ÌŠeƒtƒ@ƒCƒ‹“à‚ÌuX-API-KEYv‚Éw’è‚·‚é
+ã€ãƒ•ã‚¡ã‚¤ãƒ«ãƒªã‚¹ãƒˆã€‘
+ï¼‘ï¼ãƒˆãƒ¼ã‚¯ãƒ³ç™ºè¡Œ
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_token.py
+â€»ï¼‘ã§ç™ºè¡Œã—ãŸtokenã‚’ï¼’ä»¥é™ã®å„ãƒ•ã‚¡ã‚¤ãƒ«å†…ã®ã€ŒX-API-KEYã€ã«æŒ‡å®šã™ã‚‹
 
-‚QD’•¶”­’iŒ»•¨j
-i‚Pj”ƒ
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_cash_buy.py
-i‚Qj”„
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_cash_sell.py
+ï¼’ï¼æ³¨æ–‡ç™ºæ³¨ï¼ˆç¾ç‰©ï¼‰
+ï¼ˆï¼‘ï¼‰è²·
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_cash_buy.py
+ï¼ˆï¼’ï¼‰å£²
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_cash_sell.py
 
-‚RD’•¶”­’iM—pj
-i‚PjV‹K
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_margin_new.py
-i‚QjV‹K_ƒvƒŒƒ~ƒAƒ€—¿“üD
+ï¼“ï¼æ³¨æ–‡ç™ºæ³¨ï¼ˆä¿¡ç”¨ï¼‰â€»ä½¿ã‚ãªã„
+ï¼ˆï¼‘ï¼‰æ–°è¦
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_margin_new.py
+ï¼ˆï¼’ï¼‰æ–°è¦_ãƒ—ãƒ¬ãƒŸã‚¢ãƒ æ–™å…¥æœ­
 kabusapi_sendorder_margin_daytrade.py
-i‚Rj•ÔÏiŒˆÏ‡˜j
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_margin_pay_ClosePositionOrder.py
-i‚Sj•ÔÏi•ÔÏŒš‹Êw’èj
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_margin_pay_ClosePositions.py
+ï¼ˆï¼“ï¼‰è¿”æ¸ˆï¼ˆæ±ºæ¸ˆé †åºï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_margin_pay_ClosePositionOrder.py
+ï¼ˆï¼”ï¼‰è¿”æ¸ˆï¼ˆè¿”æ¸ˆå»ºç‰æŒ‡å®šï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_margin_pay_ClosePositions.py
 
-‚SD’•¶”­’iæ•¨j
-i‚PjV‹K
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_future_new.py
-i‚Qj•ÔÏiŒˆÏ‡˜j
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_future_pay_ClosePositionOrder.py
-i‚Rj•ÔÏi•ÔÏŒš‹Êw’èj
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_future_pay_ClosePositions.py
+ï¼”ï¼æ³¨æ–‡ç™ºæ³¨ï¼ˆå…ˆç‰©ï¼‰â€»ä½¿ã‚ãªã„
+ï¼ˆï¼‘ï¼‰æ–°è¦
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_future_new.py
+ï¼ˆï¼’ï¼‰è¿”æ¸ˆï¼ˆæ±ºæ¸ˆé †åºï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_future_pay_ClosePositionOrder.py
+ï¼ˆï¼“ï¼‰è¿”æ¸ˆï¼ˆè¿”æ¸ˆå»ºç‰æŒ‡å®šï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_future_pay_ClosePositions.py
 
-‚TD’•¶”­’iOPj
-i‚PjV‹K
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_option_new.py
-i‚Qj•ÔÏiŒˆÏ‡˜j
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_option_pay_ClosePositionOrder.py
-i‚Rj•ÔÏi•ÔÏŒš‹Êw’èj
-ƒRƒ}ƒ“ƒhFpython kabusapi_sendorder_option_pay_ClosePositions.py
+ï¼•ï¼æ³¨æ–‡ç™ºæ³¨ï¼ˆOPï¼‰â€»ä½¿ã‚ãªã„
+ï¼ˆï¼‘ï¼‰æ–°è¦
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_option_new.py
+ï¼ˆï¼’ï¼‰è¿”æ¸ˆï¼ˆæ±ºæ¸ˆé †åºï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_option_pay_ClosePositionOrder.py
+ï¼ˆï¼“ï¼‰è¿”æ¸ˆï¼ˆè¿”æ¸ˆå»ºç‰æŒ‡å®šï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_sendorder_option_pay_ClosePositions.py
 
-‚UD’•¶æÁ
-ƒRƒ}ƒ“ƒhFpython kabusapi_cancelorder.py
+ï¼–ï¼æ³¨æ–‡å–æ¶ˆ
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_cancelorder.py
 
-‚VDæˆø—]—ÍiŒ»•¨j
-ƒRƒ}ƒ“ƒhFpython kabusapi_cash.py
+ï¼—ï¼å–å¼•ä½™åŠ›ï¼ˆç¾ç‰©ï¼‰
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_cash.py
 
-‚WDæˆø—]—ÍiM—pj
-ƒRƒ}ƒ“ƒhFpython kabusapi_margin.py
+ï¼˜ï¼å–å¼•ä½™åŠ›ï¼ˆä¿¡ç”¨ï¼‰â€»ä½¿ã‚ãªã„
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_margin.py
 
-‚XDæˆø—]—Íiæ•¨j
-ƒRƒ}ƒ“ƒhFpython kabusapi_wallet_future.py
+ï¼™ï¼å–å¼•ä½™åŠ›ï¼ˆå…ˆç‰©ï¼‰â€»ä½¿ã‚ãªã„
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_wallet_future.py
 
-10Dæˆø—]—ÍiOPj
-ƒRƒ}ƒ“ƒhFpython kabusapi_wallet_option.py
+10ï¼å–å¼•ä½™åŠ›ï¼ˆOPï¼‰â€»ä½¿ã‚ãªã„
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_wallet_option.py
 
-11D‰¿î•ñE”Âî•ñ
-ƒRƒ}ƒ“ƒhFpython kabusapi_board.py
+11ï¼æ™‚ä¾¡æƒ…å ±ãƒ»æ¿æƒ…å ±
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_board.py
 
-12D–Á•¿î•ñ
-ƒRƒ}ƒ“ƒhFpython kabusapi_symbol.py
+12ï¼éŠ˜æŸ„æƒ…å ±
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_symbol.py
 
-13D’•¶–ñ’èÆ‰ï
-ƒRƒ}ƒ“ƒhFpython kabusapi_orders.py
+13ï¼æ³¨æ–‡ç´„å®šç…§ä¼š
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_orders.py
 
-14Dc‚Æ‰ï
-ƒRƒ}ƒ“ƒhFpython kabusapi_positions.py
+14ï¼æ®‹é«˜ç…§ä¼š
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_positions.py
 
-15Dæ•¨–Á•¿ƒR[ƒhæ“¾
-ƒRƒ}ƒ“ƒhFpython kabusapi_symbolname_future.py
+15ï¼å…ˆç‰©éŠ˜æŸ„ã‚³ãƒ¼ãƒ‰å–å¾—
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_symbolname_future.py
 
-16DƒIƒvƒVƒ‡ƒ“Aƒ~ƒjƒIƒvƒVƒ‡ƒ“(ŒÀŒ)–Á•¿ƒR[ƒhæ“¾
-ƒRƒ}ƒ“ƒhFpython kabusapi_symbolname_option.py
+16ï¼ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã€ãƒŸãƒ‹ã‚ªãƒ—ã‚·ãƒ§ãƒ³(é™æœˆ)éŠ˜æŸ„ã‚³ãƒ¼ãƒ‰å–å¾—
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_symbolname_option.py
 
-17DPUSH”zMŠJn
-ƒRƒ}ƒ“ƒhFpython kabusapi_websocket.py
+17ï¼PUSHé…ä¿¡é–‹å§‹
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_websocket.py
 
-18D–Á•¿“o˜^
-ƒRƒ}ƒ“ƒhFpython kabusapi_register.py
+18ï¼éŠ˜æŸ„ç™»éŒ²
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_register.py
 
-19D–Á•¿“o˜^‰ğœ
-ƒRƒ}ƒ“ƒhFpython kabusapi_unregister.py
+19ï¼éŠ˜æŸ„ç™»éŒ²è§£é™¤
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_unregister.py
 
-20D–Á•¿“o˜^‘S‰ğœ
-ƒRƒ}ƒ“ƒhFpython kabusapi_unregisterall.py
+20ï¼éŠ˜æŸ„ç™»éŒ²å…¨è§£é™¤
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_unregisterall.py
 
-21. Ú×ƒ‰ƒ“ƒLƒ“ƒO
-ƒRƒ}ƒ“ƒhFkabusapi_ranking.py
+21. è©³ç´°ãƒ©ãƒ³ã‚­ãƒ³ã‚°
+ã‚³ãƒãƒ³ãƒ‰ï¼škabusapi_ranking.py
 
-22. ˆ×‘Öî•ñ
-ƒRƒ}ƒ“ƒhFkabusapi_exchange.py
+22. ç‚ºæ›¿æƒ…å ±
+ã‚³ãƒãƒ³ãƒ‰ï¼škabusapi_exchange.py
 
-23. ‹K§î•ñ
-ƒRƒ}ƒ“ƒhFkabusapi_regulations.py
+23. è¦åˆ¶æƒ…å ±
+ã‚³ãƒãƒ³ãƒ‰ï¼škabusapi_regulations.py
 
-24. —Dæsê
-ƒRƒ}ƒ“ƒhFkabusapi_primaryexchange.py
+24. å„ªå…ˆå¸‚å ´
+ã‚³ãƒãƒ³ãƒ‰ï¼škabusapi_primaryexchange.py
 
-25. ƒ\ƒtƒgƒŠƒ~ƒbƒg
-ƒRƒ}ƒ“ƒhFkabusapi_apisoftlimit.py
+25. ã‚½ãƒ•ãƒˆãƒªãƒŸãƒƒãƒˆ
+ã‚³ãƒãƒ³ãƒ‰ï¼škabusapi_apisoftlimit.py
 
-26. ƒvƒŒƒ~ƒAƒ€—¿æ“¾
+26. ãƒ—ãƒ¬ãƒŸã‚¢ãƒ æ–™å–å¾—
 kabusapi_marginpremium.py
 
-27Dƒ~ƒjƒIƒvƒVƒ‡ƒ“(ŒÀT)–Á•¿ƒR[ƒhæ“¾
-ƒRƒ}ƒ“ƒhFpython kabusapi_symbolname_minioptionweekly.py
+27ï¼ãƒŸãƒ‹ã‚ªãƒ—ã‚·ãƒ§ãƒ³(é™é€±)éŠ˜æŸ„ã‚³ãƒ¼ãƒ‰å–å¾—
+ã‚³ãƒãƒ³ãƒ‰ï¼špython kabusapi_symbolname_minioptionweekly.py
 
 
-// ƒ‰ƒCƒZƒ“ƒX‚É‚Â‚¢‚Ä
+// ãƒ©ã‚¤ã‚»ãƒ³ã‚¹ã«ã¤ã„ã¦
 Copyright (c) 2020 au Kabucom Securities Co., Ltd.
 Released under the MIT license
 https://opensource.org/licenses/mit-license.php
