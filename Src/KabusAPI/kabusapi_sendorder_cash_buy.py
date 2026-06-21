@@ -74,7 +74,7 @@ class BuyOrderRequest:
             "ReverseLimitOrder": self.ReverseLimitOrder.to_dict()
         }
 	# 注文送信
-	def SendOrder(self):
+	def Send(self):
 		json_data = json.dumps(self.to_dict()).encode('utf-8')
 
 		url = 'http://localhost:18080/kabusapi/sendorder'
