@@ -415,6 +415,7 @@ def process_one(code, original_row):
         basic = fetch_irbank_basic(code) or {}
     except Exception as e:
         error_msg += f"basic_error:{e};"
+    time.sleep(10 + random.uniform(0, 20))
     try:
         chart = fetch_irbank_chart(code) or []
     except Exception as e:
