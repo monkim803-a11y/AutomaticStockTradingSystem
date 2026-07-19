@@ -29,69 +29,105 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 import tempfile
 import subprocess
+import random
 
+def get_volume_surge_codes():
+    """
+    松井証券の出来高急増ランキング(m-table)から銘柄コード一覧を取得する。
+    _http_get_text_simple を使う実装。
+    戻り値: ['1301', '7203', ...] のようなコード一覧
+    """
+    url = "https://finance.matsui.co.jp/ranking-volume-surge/index"
+    # polite delay（固定秒は bot 判定されやすいのでランダム）
+    time.sleep(1 + random.uniform(0, 1.5))
+    html = _http_get_text_simple(url)
+    # m-table を抽出
+    table_match = re.search(
+        r'<table[^>]*class="m-table"[^>]*>(.*?)</table>',
+        html,
+        re.DOTALL | re.IGNORECASE
+    )
+
+    if not table_match:
+        raise RuntimeError("m-table が見つかりませんでした。HTML構造が変わった可能性があります。")
+    table_html = table_match.group(1)
+    # td の中から銘柄コード（4〜5桁の数字）を抽出
+    codes = []
+    for td in re.findall(r'<td[^>]*>(.*?)</td>', table_html, re.DOTALL | re.IGNORECASE):
+        text = re.sub(r'<.*?>', '', td).strip()  # タグ除去
+        # 改行で分割
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        if len(lines) < 2:
+            continue
+
+        # 2行目に「150A 東G」などが入っている
+        second_line = lines[1]
+
+        # 先頭の英数字（銘柄コード）だけ抽出
+        m = re.match(r'^([0-9A-Za-z]+)', second_line)
+        if m:
+            code = m.group(1)
+            codes.append(code)
+    return sorted(codes)
 # ------------------------------------------------------------------
 # 既存の irbank 関連関数を優先して読み込む
 # 同じフォルダに irbank_basic.py / irbank_chart.py があればそれを使う
 # 無ければ簡易フォールバック実装を使う（実運用では既存モジュールを用意してください）
 # ------------------------------------------------------------------
-try:
-    from irbank_basic import fetch_irbank_basic
-    from irbank_chart import fetch_irbank_chart
-except Exception:
-    # 簡易フォールバック（最低限の動作確認用）
-    def _http_get_text_simple(url):
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req) as res:
-            return res.read().decode("utf-8", errors="ignore")
 
-    def fetch_irbank_basic(code):
-        """簡易フォールバック: 主要指標を可能な限り抽出（実運用では既存モジュールを使う）"""
-        html = _http_get_text_simple(f"https://irbank.net/{code}")
-        def find(p):
-            m = re.search(p, html, re.DOTALL)
-            return m.group(1) if m else None
-        return {
-            "code": code,
-            "PER": find(r"PER（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            "PBR": find(r"PBR（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            "ROE": find(r"ROE（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            "ROA": find(r"ROA（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            "EPS": find(r"EPS（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            "BPS": find(r"BPS（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
-            # 出来高等はページ構造に依存するため見つからない場合あり
-            "volume": find(r"出来高.*?class=\"co_sm\">([\d,億万]+)"),
-            "price_5d": find(r"株価（5日）.*?class=\"text\">([\d,]+)"),
-            "price_25d": find(r"株価（25日）.*?class=\"text\">([\d,]+)"),
-            "volume_5d_value": find(r"出来高（5日）.*?class=\"co_sm\">([\d,]+)")
-        }
+# 簡易フォールバック（最低限の動作確認用）
+def _http_get_text_simple(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    with urllib.request.urlopen(req) as res:
+        return res.read().decode("utf-8", errors="ignore")
 
-    def fetch_irbank_chart(code):
-        """簡易フォールバック: tbc テーブルから直近20行を抜く"""
-        html = _http_get_text_simple(f"https://irbank.net/{code}/chart")
-        table_m = re.search(r'<table[^>]*id="tbc"[^>]*>.*?</table>', html, re.DOTALL)
-        if not table_m:
-            return []
-        table_html = table_m.group(0)
-        rows = re.findall(r'<tr.*?</tr>', table_html, re.DOTALL)
-        out = []
-        for row in rows[:20]:
-            cells = re.findall(r'<td.*?>(.*?)</td>', row, re.DOTALL)
-            clean = [re.sub(r'<.*?>', '', c).strip() for c in cells]
-            if len(clean) < 10:
-                continue
-            out.append({
-                "date": clean[0],
-                "open": clean[1],
-                "high": clean[2],
-                "low": clean[3],
-                "close": clean[4],
-                "volume": clean[6],
-                "market_cap": clean[7],
-                "deviation_25d": clean[8],
-                "PER": clean[9],
-                "PBR": clean[10] if len(clean) > 10 else None
-            })
+def fetch_irbank_basic(code):
+    """簡易フォールバック: 主要指標を可能な限り抽出（実運用では既存モジュールを使う）"""
+    html = _http_get_text_simple(f"https://irbank.net/{code}")
+    def find(p):
+        m = re.search(p, html, re.DOTALL)
+        return m.group(1) if m else None
+    return {
+        "code": code,
+        "PER": find(r"PER（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        "PBR": find(r"PBR（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        "ROE": find(r"ROE（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        "ROA": find(r"ROA（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        "EPS": find(r"EPS（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        "BPS": find(r"BPS（連）.*?class=\"text\">([\d\.,億万％\-%+]+)"),
+        # 出来高等はページ構造に依存するため見つからない場合あり
+        "volume": find(r"出来高.*?class=\"co_sm\">([\d,億万]+)"),
+        "price_5d": find(r"株価（5日）.*?class=\"text\">([\d,]+)"),
+        "price_25d": find(r"株価（25日）.*?class=\"text\">([\d,]+)"),
+        "volume_5d_value": find(r"出来高（5日）.*?class=\"co_sm\">([\d,]+)")
+     }
+
+def fetch_irbank_chart(code):
+    """簡易フォールバック: tbc テーブルから直近20行を抜く"""
+    html = _http_get_text_simple(f"https://irbank.net/{code}/chart")
+    table_m = re.search(r'<table[^>]*id="tbc"[^>]*>.*?</table>', html, re.DOTALL)
+    if not table_m:
+        return []
+    table_html = table_m.group(0)
+    rows = re.findall(r'<tr.*?</tr>', table_html, re.DOTALL)
+    out = []
+    for row in rows[:20]:
+        cells = re.findall(r'<td.*?>(.*?)</td>', row, re.DOTALL)
+        clean = [re.sub(r'<.*?>', '', c).strip() for c in cells]
+        if len(clean) < 10:
+            continue
+        out.append({
+            "date": clean[0],
+            "open": clean[1],
+            "high": clean[2],
+            "low": clean[3],
+            "close": clean[4],
+            "volume": clean[6],
+            "market_cap": clean[7],
+            "deviation_25d": clean[8],
+            "PER": clean[9],
+            "PBR": clean[10] if len(clean) > 10 else None
+        })
         return out
 
 # ------------------------------------------------------------------
@@ -355,7 +391,7 @@ def filter_target_rows(rows):
             code = str(int(float(code_raw)))
         except Exception:
             code = str(code_raw).strip()
-        if market in ["プライム（内国株式）", "グロース（内国株式）", "スタンダード（内国株式）"]:
+        if market in ["プライム（内国株式）", "グロース（内国株式）", "スタンダード（内国株式）"] and code in  get_volume_surge_codes():
             targets.append((code, row))
     return targets
 
@@ -622,7 +658,7 @@ def run_daily_batch(output_dir="."):
             temp_json_files.append(json_path)
             print(f"[OK] {code}")
             # サイト負荷を下げるため短いスリープ
-            time.sleep(0.5)
+            time.sleep(10 + random.uniform(0, 20))
         except Exception as e:
             print(f"[ERR] {code} -> {e}")
 
@@ -732,4 +768,5 @@ def run_daily_batch(output_dir="."):
 # 実行
 # ------------------------------------------------------------------
 if __name__ == "__main__":
+    #get_volume_surge_codes()
     run_daily_batch()
