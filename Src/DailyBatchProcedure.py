@@ -39,7 +39,7 @@ def get_volume_surge_codes():
     """
     url = "https://finance.matsui.co.jp/ranking-volume-surge/index"
     # polite delay（固定秒は bot 判定されやすいのでランダム）
-    time.sleep(1 + random.uniform(0, 1.5))
+    time.sleep(10 + random.uniform(0, 20))
     html = _http_get_text_simple(url)
     # m-table を抽出
     table_match = re.search(
@@ -641,7 +641,7 @@ def run_daily_batch(output_dir="."):
     header, rows = parse_jpx_file(local_path, ext)
     print(f"総行数: {len(rows)}")
 
-    volume_ranking = get_volume_surge_codes.copy()
+    volume_ranking = get_volume_surge_codes()
     targets = filter_target_rows(rows, volume_ranking)
     print(f"対象銘柄数 (プライム/グロース/スタンダード): {len(targets)}")
 
