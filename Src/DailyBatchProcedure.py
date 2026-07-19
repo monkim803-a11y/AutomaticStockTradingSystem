@@ -384,7 +384,7 @@ def parse_jpx_file(path, ext):
 # 対象銘柄フィルタ（B列=コード, D列=市場区分 を想定）
 # 戻り値: list of (code_str, original_row)
 # ------------------------------------------------------------------
-def filter_target_rows(rows):
+def filter_target_rows(rows, volume_ranking):
     targets = []
     for row in rows:
         if len(row) < 4:
@@ -395,7 +395,7 @@ def filter_target_rows(rows):
             code = str(int(float(code_raw)))
         except Exception:
             code = str(code_raw).strip()
-        if market in ["プライム（内国株式）", "グロース（内国株式）", "スタンダード（内国株式）"] and code in  get_volume_surge_codes():
+        if market in ["プライム（内国株式）", "グロース（内国株式）", "スタンダード（内国株式）"]and code in volume_ranking:
             targets.append((code, row))
     return targets
 
@@ -641,7 +641,8 @@ def run_daily_batch(output_dir="."):
     header, rows = parse_jpx_file(local_path, ext)
     print(f"総行数: {len(rows)}")
 
-    targets = filter_target_rows(rows)
+    volume_ranking = get_volume_surge_codes
+    targets = filter_target_rows(rows, vokume_ranking)
     print(f"対象銘柄数 (プライム/グロース/スタンダード): {len(targets)}")
 
     out_header = extend_header(header)
