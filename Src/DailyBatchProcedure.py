@@ -382,21 +382,7 @@ def fetch_irbank_all(code):
     return {
         "code": code,
         "basic": basic,
-        "chart_20days": chart
-        "news_positive_score": avg_score
-    }
-
-# ---------------------------------------------------------
-# 動作確認
-# ---------------------------------------------------------
-if __name__ == "__main__":
-    result = fetch_price("7203")  # トヨタ
-    print(json.dumps(result, indent=2, ensure_ascii=False))
-
-    return {
-        "code": code,
-        "basic": basic,
-        "chart_20days": chart
+        "chart_20days": chart,
         "news_positive_score": avg_score
     }
 
