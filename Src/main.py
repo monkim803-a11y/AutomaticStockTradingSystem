@@ -48,25 +48,42 @@ def main():
         try:
             previous = now
             now = datetime.now()
-            #日付が変わった場合
+            # 日付が変わった場合
             if previous.Day != now.Day:
-                #日次バッチ処理を実行したかどうか
+                # 日次バッチ処理を実行したかどうか
                 daily_done = False
             elif daily_done = False:
                 daily_batch_procedure()
                 daily_done = True
-            #マーケットクローズ後（念のため17時以降）
-            elif now.hour > MARKET_CLOSE_TIME:
-                #7時間スリープ
+                now = datetime.now()
+                # 今日の 8:00 を作る
+                target = now.replace(hour=8, minute=0, second=0, microsecond=0)
+                # もし既に8時を過ぎていたら、翌日の8時にする
+                if target <= now:
+                    target += timedelta(days=1)
+                # 残り秒数を計算
+                sleep_seconds = (target - now).total_seconds()             
+                # sleep
+                time.sleep(sleep_seconds)
+            # マーケットクローズ後
+            elif now.hour >= MARKET_CLOSE_TIME:
+                target = datetime(now.year, now.month, now.day) + timedelta(days=1)
                 time.sleep(COLLECT_STOP_TIME)
+                # 24時まで待機
+                sleep_seconds = (target - now).total_seconds()
+                if sleep_seconds > 0:
+                    time.sleep(sleep_seconds)
             else:
+                target_time = datetime.now() + timedelta(seconds=interval)
                 print(f"[{now}] Checking market conditions...")
                 market_data = api.get_market_data()
-                signal = strategy.generate_signal(market_data)
-                if signal is not None:
-                    print(f"Signal detected: {signal}")
-                    trader.execute(signal)
-                time.sleep(interval)
+                regular_batch_procedure()
+                time.sleep(3)  # ダミー処理
+                # 処理が終わったら、target_time まで sleep
+                now = datetime.now()
+                sleep_seconds = (target_time - now).total_seconds() + 1
+                if sleep_seconds > 0:
+                    time.sleep(sleep_seconds)
         except Exception as e:
             print("例外が発生しました:", e)
             traceback.print_exc()
