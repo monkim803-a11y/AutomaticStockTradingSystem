@@ -641,8 +641,8 @@ def run_daily_batch(output_dir="."):
     header, rows = parse_jpx_file(local_path, ext)
     print(f"総行数: {len(rows)}")
 
-    volume_ranking = get_volume_surge_codes
-    targets = filter_target_rows(rows, vokume_ranking)
+    volume_ranking = get_volume_surge_codes.copy()
+    targets = filter_target_rows(rows, volume_ranking)
     print(f"対象銘柄数 (プライム/グロース/スタンダード): {len(targets)}")
 
     out_header = extend_header(header)
