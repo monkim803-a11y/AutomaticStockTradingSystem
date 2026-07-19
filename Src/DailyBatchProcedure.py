@@ -78,6 +78,7 @@ def get_volume_surge_codes():
 # 簡易フォールバック（最低限の動作確認用）
 def _http_get_text_simple(url):
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+    print(url + "へリクエストを送信します")
     with urllib.request.urlopen(req) as res:
         return res.read().decode("utf-8", errors="ignore")
 
@@ -166,6 +167,7 @@ def fetch_news_score(query: str, timeout=10):
         import requests
         url = GOOGLE_NEWS_RSS.format(requests.utils.quote(query))
         headers = {"User-Agent": "Python Sentiment Script"}
+        print(url + "へリクエストを送信します")
         r = requests.get(url, headers=headers, timeout=timeout)
         r.raise_for_status()
         xml_text = r.text
@@ -174,6 +176,7 @@ def fetch_news_score(query: str, timeout=10):
         try:
             q = urllib.request.quote(query, safe='')
             url = GOOGLE_NEWS_RSS.format(q)
+            print(url + "へリクエストを送信します")
             req = urllib.request.Request(url, headers={"User-Agent": "Python Sentiment Script"})
             with urllib.request.urlopen(req, timeout=timeout) as res:
                 xml_text = res.read().decode("utf-8", errors="ignore")
@@ -234,6 +237,7 @@ def normalize_number(value):
 # ------------------------------------------------------------------
 def download_jpx_list(save_dir="."):
     page_url = "https://www.jpx.co.jp/markets/statistics-equities/misc/01.html"
+    print(url + "へリクエストを送信します")
     req = urllib.request.Request(page_url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req) as res:
         page_html = res.read().decode("utf-8", errors="ignore")
