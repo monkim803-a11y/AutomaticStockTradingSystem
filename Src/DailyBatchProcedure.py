@@ -390,5 +390,5 @@ def fetch_irbank_all(code):
 # 動作確認
 # ---------------------------------------------------------
 if __name__ == "__main__":
-    result = fetch_price("7203")  # トヨタ
+    result = fetch_irbank_all("7203")  # トヨタ
     print(json.dumps(result, indent=2, ensure_ascii=False))
