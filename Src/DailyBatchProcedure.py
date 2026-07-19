@@ -237,7 +237,7 @@ def normalize_number(value):
 # ------------------------------------------------------------------
 def download_jpx_list(save_dir="."):
     page_url = "https://www.jpx.co.jp/markets/statistics-equities/misc/01.html"
-    print(url + "へリクエストを送信します")
+    print(page_url + "へリクエストを送信します")
     req = urllib.request.Request(page_url, headers={"User-Agent": "Mozilla/5.0"})
     with urllib.request.urlopen(req) as res:
         page_html = res.read().decode("utf-8", errors="ignore")
