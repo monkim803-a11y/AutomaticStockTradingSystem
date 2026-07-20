@@ -104,7 +104,7 @@ def fetch_irbank_basic(code):
      }
 
 def fetch_irbank_chart(code):
-    """簡易フォールバック: tbc テーブルから直近20行を抜く"""
+    """簡易フォールバック: tbc テーブルから直近10行を抜く"""
     html = _http_get_text_simple(f"https://irbank.net/{code}/chart")
     table_m = re.search(r'<table[^>]*id="tbc"[^>]*>.*?</table>', html, re.DOTALL)
     if not table_m:
@@ -112,7 +112,7 @@ def fetch_irbank_chart(code):
     table_html = table_m.group(0)
     rows = re.findall(r'<tr.*?</tr>', table_html, re.DOTALL)
     out = []
-    for row in rows[:20]:
+    for row in rows[:10]:
         cells = re.findall(r'<td.*?>(.*?)</td>', row, re.DOTALL)
         clean = [re.sub(r'<.*?>', '', c).strip() for c in cells]
         if len(clean) < 10:
