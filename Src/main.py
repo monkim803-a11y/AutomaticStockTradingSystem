@@ -40,18 +40,20 @@ def main():
 
     # --- トレーダー ---
     trader = Trader(api_client=api, risk_manager=risk)
-
+    #パターン４のインターバル時間
     interval = config["system"]["interval_seconds"]
-
+    #日次バッチ実行フラグ初期化
+    daily_done = False
     # --- メインループ ---
     while True:
         try:
             previous = now
             now = datetime.now()
-            # 日付が変わった場合
+            # パターン１：日付が変わった場合
             if previous.Day != now.Day:
                 # 日次バッチ処理を実行したかどうか
                 daily_done = False
+            # パターン２：日次バッチ未実行の場合
             elif daily_done = False:
                 daily_batch_procedure()
                 daily_done = True
@@ -65,7 +67,8 @@ def main():
                 sleep_seconds = (target - now).total_seconds()             
                 # sleep
                 time.sleep(sleep_seconds)
-            # マーケットクローズ後
+                
+            # パターン３：マーケットクローズ後
             elif now.hour >= MARKET_CLOSE_TIME:
                 target = datetime(now.year, now.month, now.day) + timedelta(days=1)
                 time.sleep(COLLECT_STOP_TIME)
@@ -73,6 +76,7 @@ def main():
                 sleep_seconds = (target - now).total_seconds()
                 if sleep_seconds > 0:
                     time.sleep(sleep_seconds)
+            # パターン４：その他（レギュラーバッチ実行）
             else:
                 target_time = datetime.now() + timedelta(seconds=interval)
                 print(f"[{now}] Checking market conditions...")
