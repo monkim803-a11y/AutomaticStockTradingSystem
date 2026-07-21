@@ -106,11 +106,13 @@ def fetch_irbank_basic(code):
 def fetch_irbank_chart(code):
     """簡易フォールバック: tbc テーブルから直近10行を抜く"""
     html = _http_get_text_simple(f"https://irbank.net/{code}/chart")
-    table_m = re.search(r'<table[^>]*id="tbc"[^>]*>.*?</table>', html, re.DOTALL)
-    if not table_m:
-        return []
-    table_html = table_m.group(0)
-    rows = re.findall(r'<tr.*?</tr>', table_html, re.DOTALL)
+    m = re.search(r'(<table[^>]*id="tbc"[^>]*>.*?</table>)', html, re.DOTALL | re.IGNORECASE)
+    if not m:
+        raise RuntimeError("tbc テーブルが見つかりません")
+    table_html = m.group(1)   # タグ込みのテーブル全体
+
+    # tr をすべて取得（非貪欲）
+    rows = re.findall(r'<tr\b[^>]*?>(.*?)</tr>', table_html, re.DOTALL | re.IGNORECASE)
     out = []
     for row in rows[:10]:
         cells = re.findall(r'<td.*?>(.*?)</td>', row, re.DOTALL)
@@ -129,7 +131,7 @@ def fetch_irbank_chart(code):
             "PER": clean[9],
             "PBR": clean[10] if len(clean) > 10 else None
         })
-        return out
+    return out
 
 # ------------------------------------------------------------------
 # ニュース感情スコア（Google News RSS）
